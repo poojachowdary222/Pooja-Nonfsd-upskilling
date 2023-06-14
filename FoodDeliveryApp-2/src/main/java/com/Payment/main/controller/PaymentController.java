@@ -12,7 +12,8 @@ import com.Payment.main.entity.Payment;
 import com.Payment.main.service.PaymentService;
 
 @RestController  
-//@RequestMapping("/payment")
+@RequestMapping("/payment")
+@CrossOrigin(" http://localhost:4200/")
 public class PaymentController {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
@@ -23,44 +24,46 @@ public class PaymentController {
     @PostMapping("/addPayment")
     public Payment insertPayment(@RequestBody Payment payment) {
         try {
-            logger.info("Inserting payment: {}", payment);
+            // Log a debug message
+            logger.debug("Inserting payment: {}", payment);
             return paymentService.insertPayment(payment);
         } catch (Exception e) {
-            logger.error("Failed to insert payment", e);
+            // Log an error message with the stack trace
+            logger.error("Error while inserting payment", e);
+            e.printStackTrace();
         }
         return payment;
-    }
+    } 
 
     @DeleteMapping("/deletePayment/{pId}")
     public String deletePayment(@PathVariable int pId) throws Exception {
         try {
+            // Log an info message
             logger.info("Deleting payment with ID: {}", pId);
             paymentService.deletePayment(pId);
         } catch (Exception e) {
-            logger.error("Failed to delete payment with ID: {}", pId, e);
+            // Log an error message with the stack trace
+            logger.error("Error while deleting payment with ID: " + pId, e);
+            e.printStackTrace();
         }
         return "Deleted Id = " + pId + " Data";
     }
 
     @PutMapping("/updatePayment")
     public Payment updatePayment(@RequestBody Payment payment) throws Exception {
-        try {
-            logger.info("Updating payment: {}", payment);
-            return paymentService.updatePayment(payment);
-        } catch (Exception e) {
-            logger.error("Failed to update payment", e);
-        }
-        return payment;
+        // Log a debug message
+        logger.debug("Updating payment: {}", payment);
+      
+        return paymentService.updatePayment(payment);
+        
     }
 
     @GetMapping("/allPayments")
     public List<Payment> getAllPayments() throws Exception {
-        try {
-            logger.info("Retrieving all payments");
-            return paymentService.getAllPayments();
-        } catch (Exception e) {
-            logger.error("Failed to retrieve all payments", e);
-        }
-        return Collections.emptyList();
+        // Log a debug message
+        logger.debug("Retrieving all payments");
+      
+        return paymentService.getAllPayments(); 
     }
+
 }

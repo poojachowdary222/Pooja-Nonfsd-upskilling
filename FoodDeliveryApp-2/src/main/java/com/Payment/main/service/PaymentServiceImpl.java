@@ -1,48 +1,46 @@
 package com.Payment.main.service;
 
 import java.util.List;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.Payment.main.entity.Payment;
 import com.Payment.main.exception.InvalidPaymentId;
 import com.Payment.main.repository.PaymentRepository;
 
 @Service
+public class PaymentServiceImpl implements PaymentService {
+    
+    private static final Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
-public class PaymentServiceImpl implements PaymentService{
+    @Autowired
+    PaymentRepository paymentRepository;
 
-	@Autowired
-	PaymentRepository paymentRepository;
+    public Payment insertPayment(Payment payment) throws Exception {
+        logger.info("Inserting payment: {}", payment);
+        return paymentRepository.save(payment);
+    }
+ 
+    @Override
+    public List<Payment> getAllPayments() throws Exception {
+        logger.info("Fetching all payments");
+        return paymentRepository.findAll();
+    }
 
-	public Payment insertPayment(Payment payment) throws Exception {
-		return paymentRepository.save(payment);  // Note :  save() is already implemented by Spring Data JPA
-		
-	}
-	 
-	@Override
-	public List<Payment> getAllPayments() throws Exception {
-		
-		return paymentRepository.findAll();
-		}
+    @Override
+    public Payment updatePayment(Payment payment) throws Exception {
+        logger.info("Updating payment: {}", payment);
+        return paymentRepository.save(payment);
+    }
 
-	@Override
-	public Payment updatePayment(Payment payment) throws Exception {
-		// TODO Auto-generated method stub
-		return paymentRepository.save(payment);
-	}
-
-	@Override
-
-	public void deletePayment(int pId) throws InvalidPaymentId {
-	paymentRepository.deleteById(pId);
-
-	}
-
-	 
+    @Override
+    public void deletePayment(int pId) throws InvalidPaymentId {
+        logger.info("Deleting payment with ID: {}", pId);
+        paymentRepository.deleteById(pId);
+    }
 }
+
 
 	
 	

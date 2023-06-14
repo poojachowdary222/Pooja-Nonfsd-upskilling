@@ -21,7 +21,7 @@ public class Payment {
     private int pId;
 	private int orderId;
 	private	float totalAmount;
-	private String status;
+	
 	
 	
 	 
@@ -32,12 +32,11 @@ public class Payment {
  
 
 
-	public Payment(int pId,int orderId,float totalAmount,String status) {
+	public Payment(int pId,int orderId,float totalAmount) {
 		super();
 		this.pId = pId;
 		this.orderId = orderId;
 		this.totalAmount = totalAmount;
-		this.status = status;
 		
 		
 		
@@ -76,25 +75,11 @@ public class Payment {
 	}
 
 
-
-	public String getStatus() {
-		return status;
-	}  
-
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-
 	@Override
 	public String toString() {
-		return "Payment [pId=" + pId + ", orderId=" + orderId + ", totalAmount=" + totalAmount + ", status="
-				+ status + "]"; 
+		return "Payment [pId=" + pId + ", orderId=" + orderId + ", totalAmount=" + totalAmount + "]"; 
 	}
 	
-	
+	 
 }
 

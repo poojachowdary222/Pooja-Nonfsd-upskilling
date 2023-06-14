@@ -37,13 +37,13 @@ class PaymentServiceImplTest {
     	Payment payment = new Payment();
         payment.setpId(1);
         payment.setTotalAmount(10.5f);
-        payment.setStatus("pending");
+        
 
         when(paymentRepository.save(payment)).thenReturn(payment);
 
         Payment result = paymentService.insertPayment(payment);
 
-        assertNotNull(result);
+        assertNotNull(result); 
         assertEquals(payment, result);
 
         verify(paymentRepository, times(1)).save(payment);
@@ -52,8 +52,8 @@ class PaymentServiceImplTest {
     @Test
     public void testGetAllPayments() throws Exception {
         List<Payment> paymentList = new ArrayList<>();
-        paymentList.add(new Payment(1, 2, 11.6f, "delivered"));
-        paymentList.add(new Payment(1, 2, 11.6f, "delivered"));
+        paymentList.add(new Payment(1, 2, 11.6f));
+        paymentList.add(new Payment(1, 2, 11.6f));
 
         when(paymentRepository.findAll()).thenReturn(paymentList);
 
@@ -70,7 +70,7 @@ class PaymentServiceImplTest {
         Payment payment = new Payment();
         payment.setpId(1);
         payment.setTotalAmount(10.5f);
-        payment.setStatus("pending");
+       
 
         when(paymentRepository.existsById(payment.getpId())).thenReturn(true);
         when(paymentRepository.save(payment)).thenReturn(payment);
@@ -80,23 +80,7 @@ class PaymentServiceImplTest {
         assertNotNull(result);
         assertEquals(payment, result);
     }
-//        verify(paymentRepository, times(1)).existsById(payment.getpId());
-   //   verify(paymentRepository, times(1)).save(payment);
-    
 
-//    @Test
-//    public void testUpdatePayment_InvalidId() throws Exception {
-//        Payment payment = new Payment();
-//        payment.setpId(1);
-//        payment.setTotalAmount(10.5f);
-//        payment.setStatus("pending");
-//
-//        when(paymentRepository.existsById(payment.getpId())).thenReturn(false);
-//
-//        assertThrows(InvalidPaymentId.class, () -> paymentService.updatePayment(payment));
-//    }
-//        verify(paymentRepository, times(1)).existsById(payment.getpId());
-      // verify(paymentRepository, never()).save(payment);
    
 
     @Test
@@ -108,20 +92,6 @@ class PaymentServiceImplTest {
 assertDoesNotThrow(() -> paymentService.deletePayment(paymentId)); 
 
     }
-//        verify(paymentRepository, times(1)).existsById(paymentId);
-    // verify(paymentRepository, times(1)).deleteById(paymentId);
-    
 
-//    @Test
-//    public void testDeletePayment_InvalidId() throws InvalidPaymentId {
-//        int paymentId = 1;
-//
-//        when(paymentRepository.existsById(paymentId)).thenReturn(false);
-//
-//        assertThrows(InvalidPaymentId.class, () -> paymentService.deletePayment(paymentId));
-//
-//        verify(paymentRepository, times(1)).existsById(paymentId);
-//      verify(paymentRepository, never()).deleteById(paymentId);
-//    }
   
 }
