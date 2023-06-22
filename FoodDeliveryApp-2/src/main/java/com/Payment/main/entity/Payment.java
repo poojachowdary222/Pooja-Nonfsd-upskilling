@@ -22,8 +22,6 @@ public class Payment {
 	private int orderId;
 	private	float totalAmount;
 	
-	
-	
 	 
 	public Payment() {
 		super();
@@ -78,8 +76,7 @@ public class Payment {
 	@Override
 	public String toString() {
 		return "Payment [pId=" + pId + ", orderId=" + orderId + ", totalAmount=" + totalAmount + "]"; 
-	}
-	
+	} 	
 	 
 }
 

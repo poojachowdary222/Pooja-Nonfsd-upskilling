@@ -1,29 +1,30 @@
 package com.Payment.main.controller;
 
-import java.util.Collections;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.Payment.main.entity.Payment;
 import com.Payment.main.service.PaymentService;
 
 @RestController  
 @RequestMapping("/payment")
-@CrossOrigin(" http://localhost:4200/")
+//@CrossOrigin(" http://localhost:4200/")
 public class PaymentController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+    private static  Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
     @Autowired
     private PaymentService paymentService;
+    
+ 
 
     @PostMapping("/addPayment")
     public Payment insertPayment(@RequestBody Payment payment) {
-        try {
+       
+    	
+    	try {
             // Log a debug message
             logger.debug("Inserting payment: {}", payment);
             return paymentService.insertPayment(payment);
@@ -43,7 +44,7 @@ public class PaymentController {
             paymentService.deletePayment(pId);
         } catch (Exception e) {
             // Log an error message with the stack trace
-            logger.error("Error while deleting payment with ID: " + pId, e);
+           // logger.error("Error while deleting payment with ID: " + pId, e);
             e.printStackTrace();
         }
         return "Deleted Id = " + pId + " Data";

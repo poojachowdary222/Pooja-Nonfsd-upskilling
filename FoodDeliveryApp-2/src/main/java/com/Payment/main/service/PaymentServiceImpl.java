@@ -12,7 +12,7 @@ import com.Payment.main.repository.PaymentRepository;
 @Service
 public class PaymentServiceImpl implements PaymentService {
     
-    private static final Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
+   private static  Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
     @Autowired
     PaymentRepository paymentRepository;
